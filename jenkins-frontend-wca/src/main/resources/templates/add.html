@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="copyright" content="Rodrigo anchieta"/>
+	<meta name="contact" content="rodrigoganchieta@gmail.com"/>
+	<meta name="robots" content="all"/>
+	<meta name="googlebot" content="all"/>
+	<meta name="robots" content="index,follow"/>
+	<meta name="googlebot" content="index,follow"/>
+	<meta name="distribution" content="global"/>
+	<meta name="rating" content="general"/>
+	<meta name="rating" content="safe for kids"/>
+	<meta name="classification" content="Sites">
+
+	<title>Tasks - Rodrigo Gonçalves de Anchieta</title>
+
+	<meta name="description" content="Integração contínua com testes, utilizando Jenkins criado por Wcaquino, aluno Rodrigo Gonçalves de Anchieta">
+	<meta name="abstract" content="Integração contínua com testes, utilizando Jenkins criado por Wcaquino, aluno Rodrigo Gonçalves de Anchieta">
+	<meta name="keywords" content="jenkins, integração contínua, testes, DevOps, Rodrigo Anchieta, rodrigoganchieta, Rodrigo Gonçalves de Anchieta">
+
+	<link rel="shortcut icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+	<link rel="stylesheet" href="/tasks/css/bootstrap.min.css">
+	<script src="/tasks/js/bootstrap.min.js"></script>
+</head>
+
+<body class="bg-light">
+	<div class="container w-75">
+		<div class="py-5 text-center">
+			<h1>Tasks</h1>
+			<p class="lead">A very simple task management tool</p>
+		</div>
+		<p class="alert alert-danger" role="alert" th:if="${error != null}" th:text="${error}" id="message" />
+		<form action="save" method="post" th:object="${todo}">
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Task:</label>
+				<div class="col-sm-10">
+					<input th:field="*{task}" class="form-control" id="task">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Due Date:</label>
+				<div class="col-sm-10">
+					<input name="dueDate" th:field="*{dueDate}" class="form-control" id="dueDate">
+				</div>
+			</div>
+			<input type="submit" value="Save" class="btn btn-block btn-outline-secondary" id="saveButton">
+		</form>
+	</div>
+	<footer class="my-5 pt-5 text-muted text-center text-small border-top">
+		<p class="mb-1">&copy; 2023 Wcaquino's DevOps Course & <a href="https://github.com/rodrigoganchieta" target="_blank"><i class="devicon-github-original"></i> RODRIGOGANCHIETA</a></p>
+	</footer>
+</body>
+
+</html>

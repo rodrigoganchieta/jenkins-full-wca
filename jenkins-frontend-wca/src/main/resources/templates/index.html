@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="copyright" content="Rodrigo anchieta"/>
+	<meta name="contact" content="rodrigoganchieta@gmail.com"/>
+	<meta name="robots" content="all"/>
+	<meta name="googlebot" content="all"/>
+	<meta name="robots" content="index,follow"/>
+	<meta name="googlebot" content="index,follow"/>
+	<meta name="distribution" content="global"/>
+	<meta name="rating" content="general"/>
+	<meta name="rating" content="safe for kids"/>
+	<meta name="classification" content="Sites">
+
+	<title>Tasks - Rodrigo Gonçalves de Anchieta</title>
+
+	<meta name="description" content="Integração contínua com testes, utilizando Jenkins criado por Wcaquino, aluno Rodrigo Gonçalves de Anchieta">
+	<meta name="abstract" content="Integração contínua com testes, utilizando Jenkins criado por Wcaquino, aluno Rodrigo Gonçalves de Anchieta">
+	<meta name="keywords" content="jenkins, integração contínua, testes, DevOps, Rodrigo Anchieta, rodrigoganchieta, Rodrigo Gonçalves de Anchieta">
+
+	<link rel="shortcut icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+	<link rel="stylesheet" href="/tasks/css/bootstrap.min.css">
+	<script src="/tasks/js/bootstrap.min.js"></script>
+</head>
+
+<body class="bg-light">
+	<div class="container w-75">
+		<div class="py-5 text-center">
+			<h1>Tasks</h1>
+			<p class="lead">A very simple task management tool</p>
+		</div>
+		<p class="alert alert-success" role="alert" th:if="${success != null}" th:text="${success}" id="message" />
+		<div th:switch="${todos.size()}">
+			<h2 th:case="0">No tasks... enjoy your day!</h2>
+			<div th:case="*">
+				<table id="todoTable" class="table table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th>Task</th>
+							<th>Due Date</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="todo : ${todos}">
+							<td th:text="${todo.task}"></td>
+							<td th:text="${todo.dueDate}"></td>
+							<td><a class="btn btn-outline-danger btn-sm"
+									th:href="@{/delete/{id}(id=${todo.id})}">Remove</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<a class="btn btn-outline-secondary" role="button" th:href="@{/add}" id="addTodo">Add Todo</a>
+	</div>
+	<footer class="my-5 pt-5 text-muted text-center text-small border-top">
+		<p class="mb-1">&copy; 2023 Wcaquino's DevOps Course & <a href="https://github.com/rodrigoganchieta" target="_blank"><i class="devicon-github-original"></i> RODRIGOGANCHIETA</a></p>
+		<p class="mb-1" th:if="${version != null}" th:text="${version}" id="version"></p>
+	</footer>
+</body>
+
+</html>
