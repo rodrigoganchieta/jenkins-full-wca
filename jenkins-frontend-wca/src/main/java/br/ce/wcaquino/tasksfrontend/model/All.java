@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Todo {
+public class All {
 
 	private Long id;
 	private String task;
@@ -40,7 +40,7 @@ public class Todo {
 
 	@Override
 	public String toString() {
-		return "Todo [id=" + id + ", task=" + task + ", dueDate=" + dueDate + "]";
+		return "All [id=" + id + ", task=" + task + ", dueDate=" + dueDate + "]";
 	}
 	
 	

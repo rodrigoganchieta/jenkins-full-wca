@@ -33,10 +33,10 @@
 			<p class="lead">A very simple task management tool</p>
 		</div>
 		<p class="alert alert-success" role="alert" th:if="${success != null}" th:text="${success}" id="message" />
-		<div th:switch="${todos.size()}">
+		<div th:switch="${alls.size()}">
 			<h2 th:case="0">No tasks... enjoy your day!</h2>
 			<div th:case="*">
-				<table id="todoTable" class="table table-hover">
+				<table id="allTable" class="table table-hover">
 					<thead class="thead-dark">
 						<tr>
 							<th>Task</th>
@@ -45,18 +45,18 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="todo : ${todos}">
-							<td th:text="${todo.task}"></td>
-							<td th:text="${todo.dueDate}"></td>
+						<tr th:each="all : ${alls}">
+							<td th:text="${all.task}"></td>
+							<td th:text="${all.dueDate}"></td>
 							<td><a class="btn btn-outline-danger btn-sm"
-									th:href="@{/delete/{id}(id=${todo.id})}">Remove</a>
+									th:href="@{/delete/{id}(id=${all.id})}">Remove</a>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-		<a class="btn btn-outline-secondary" role="button" th:href="@{/add}" id="addTodo">Add Todo</a>
+		<a class="btn btn-outline-secondary" role="button" th:href="@{/add}" id="addAll">Add All</a>
 	</div>
 	<footer class="my-5 pt-5 text-muted text-center text-small border-top">
 		<p class="mb-1">&copy; 2023 Wcaquino's DevOps Course & <a href="https://github.com/rodrigoganchieta" target="_blank"><i class="devicon-github-original"></i> RODRIGOGANCHIETA</a></p>

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
-import br.ce.rodrigoganchieta.tasksfrontend.model.Todo;
+import br.ce.rodrigoganchieta.tasksfrontend.model.All;
 
 @Controller
 public class TasksController {
@@ -32,7 +32,7 @@ public class TasksController {
 	
 	@GetMapping("")
 	public String index(Model model) {
-		model.addAttribute("todos", getTodos());
+		model.addAttribute("alls", getAlls());
 		if(VERSION.startsWith("build"))
 			model.addAttribute("version", VERSION);
 		return "index";
@@ -40,16 +40,16 @@ public class TasksController {
 	
 	@GetMapping("add")
 	public String add(Model model) {
-		model.addAttribute("todo", new Todo());
+		model.addAttribute("all", new All());
 		return "add";
 	}
 
 	@PostMapping("save")
-	public String save(Todo todo, Model model) {
+	public String save(All all, Model model) {
 		try {
 			RestTemplate restTemplate = new RestTemplate();
 			restTemplate.postForObject(
-					getBackendURL() + "/jenkins-backend-wca/todo", todo, Object.class);			
+					getBackendURL() + "/jenkins-backend-wca/all", all, Object.class);			
 			model.addAttribute("success", "Success!");
 			return "index";
 		} catch(Exception e) {
@@ -57,27 +57,27 @@ public class TasksController {
 			Matcher m = compile.matcher(e.getMessage());
 			m.find();
 			model.addAttribute("error", m.group(1));
-			model.addAttribute("todo", todo);
+			model.addAttribute("all", all);
 			return "add"; 
 		} finally {
-			model.addAttribute("todos", getTodos());
+			model.addAttribute("alls", getAlls());
 		}
 	}
 	
 	@GetMapping("delete/{id}")
 	public String delete(@PathVariable Long id, Model model) {
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.delete(getBackendURL() + "/jenkins-backend-wca/todo/" + id);			
+		restTemplate.delete(getBackendURL() + "/jenkins-backend-wca/all/" + id);			
 		model.addAttribute("success", "Success!");
-		model.addAttribute("todos", getTodos());
+		model.addAttribute("alls", getAlls());
 		return "index";
 	}
 
 	
 	@SuppressWarnings("unchecked")
-	private List<Todo> getTodos() {
+	private List<All> getAlls() {
 		RestTemplate restTemplate = new RestTemplate();
 		return restTemplate.getForObject(
-				getBackendURL() + "/jenkins-backend-wca/todo", List.class);
+				getBackendURL() + "/jenkins-backend-wca/all", List.class);
 	}
 }
