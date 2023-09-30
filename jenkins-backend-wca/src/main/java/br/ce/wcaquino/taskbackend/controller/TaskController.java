@@ -20,35 +20,35 @@ import br.ce.rodrigoganchieta.taskbackend.utils.DateUtils;
 import br.ce.rodrigoganchieta.taskbackend.utils.ValidationException;
 
 @RestController
-@RequestMapping(value ="/todo")
+@RequestMapping(value ="/all")
 public class TaskController {
 
 	@Autowired
-	private TaskRepo todoRepo;
+	private TaskRepo allRepo;
 	
 	@GetMapping
 	public List<Task> findAll() {
-		return todoRepo.findAll();
+		return allRepo.findAll();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Task> save(@RequestBody Task todo) throws ValidationException {
-		if(todo.getTask() == null || todo.getTask() == "") {
+	public ResponseEntity<Task> save(@RequestBody Task all) throws ValidationException {
+		if(all.getTask() == null || all.getTask() == "") {
 			throw new ValidationException("Fill the task description");
 		}
-		if(todo.getDueDate() == null) {
+		if(all.getDueDate() == null) {
 			throw new ValidationException("Fill the due date");
 		}
-		if(!DateUtils.isEqualOrFutureDate(todo.getDueDate())) {
+		if(!DateUtils.isEqualOrFutureDate(all.getDueDate())) {
 			throw new ValidationException("Due date must not be in past");
 		}
-		Task saved = todoRepo.save(todo);
+		Task saved = allRepo.save(all);
 		return new ResponseEntity<Task>(saved, HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping(value = "/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
-		todoRepo.deleteById(id);
+		allRepo.deleteById(id);
 	}
 }
